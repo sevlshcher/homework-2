@@ -18,14 +18,10 @@ class Chat extends React.Component {
 
     sendMessageOnEnter (e) {
         if (e.key === 'Enter'){
-            const newMessage = {
-                word: this.state.messageInput,
-                id: Date.now()
-            }
-            this.setState (state => ({
-                messages: state.messages.concat(newMessage),
+            this.setState ({
+                messages: [...this.state.messages, {text: this.state.messageInput}],
                 messageInput: ''
-            }))
+            })
         }
     }
 
@@ -34,8 +30,8 @@ class Chat extends React.Component {
             <div className="chat">
                 <div className="message-list">
                     <div className="messages">
-                        {this.state.messages.map(message => (
-                            <Message key={message.id} text={message.word}/>
+                        {this.state.messages.map((message, i) => (
+                            <Message key={i} text={message.text}/>
                         ))}
                     </div>
                 </div>
